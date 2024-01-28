@@ -1,14 +1,25 @@
 local Players = game:GetService("Players")
-local player = Players.LocalPlayer.Character
+local playerList = Players.GetPlayers()
 
 local spawnPosition = Vector3.new(0, 0, 0) -- Spawn position --
 local gamePosition = Vector3.new(0, 0, 0) -- In game position --
 
 function startGame()
-    player.position = gamePosition
+    for player in playerList do
+        player.Character.position = gamePosition
+    end
 end
 
 function endGame()
-    player.position = spawnPosition
+    for player in playerList do
+        player.position = spawnPosition
+    end
 end
 
+while true do
+    startGame()
+    task.wait(45)
+
+    endGame()
+    task.wait(45)
+end
